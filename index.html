@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio 404</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      background-color: #ffffff;
+      padding: 20px 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+    section {
+      padding: 60px 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #111;
+    }
+    .gallery img {
+      width: 30%;
+      margin: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    #map {
+      height: 300px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .cennik ul, .opinie ul {
+      padding-left: 20px;
+    }
+    .logo {
+      height: 50px;
+    }
+    input, textarea, button {
+      font-family: 'Poppins', sans-serif;
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .responsive {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .responsive > div {
+      flex: 1 1 300px;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Studio 404" class="logo" />
+    <nav>
+      <a href="#o-mnie">O mnie</a>
+      <a href="#uslugi">Usługi</a>
+      <a href="#cennik">Cennik</a>
+      <a href="#referencje">Referencje</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <section id="o-mnie">
+    <h2>O mnie</h2>
+    <p>Nazywam się Paweł i prowadzę Studio 404 – kreatywne studio oferujące strony internetowe, projekty graficzne i serwis komputerowy. Jestem na ostatnim roku technikum informatycznego i tworzę portfolio, dlatego oferuję usługi w promocyjnych cenach.</p>
+  </section>
+
+  <section id="uslugi">
+    <h2>Usługi</h2>
+    <div class="responsive">
+      <div>
+        <h3>Projekty graficzne</h3>
+        <ul>
+          <li>Logo</li>
+          <li>Wizytówki</li>
+          <li>Plakaty, ulotki</li>
+          <li>Banery internetowe</li>
+          <li>Grafiki do social mediów</li>
+          <li>Pakiety brandingowe</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Strony internetowe</h3>
+        <ul>
+          <li>Strony wizytówki</li>
+          <li>Landing page</li>
+          <li>Strony z podstronami</li>
+          <li>Sklepy internetowe</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Usługi serwisowe</h3>
+        <ul>
+          <li>Składanie komputerów</li>
+          <li>Czyszczenie (wewnętrzne/zewnętrzne)</li>
+          <li>Wymiana części</li>
+          <li>Wymiana pasty termoprzewodzącej</li>
+          <li>Dobór podzespołów</li>
+          <li>Czyszczenie dysków</li>
+          <li>Instalacja systemów</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="cennik">
+    <h2>Cennik</h2>
+    <div class="responsive">
+      <div>
+        <h3>Projekty graficzne</h3>
+        <ul>
+          <li>Logo – 80–150 zł</li>
+          <li>Wizytówka – 50–80 zł</li>
+          <li>Ulotka/plakat – 70–120 zł</li>
+          <li>Grafika do social mediów – 30–60 zł</li>
+          <li>Baner internetowy – 40–70 zł</li>
+          <li>Pakiet brandingowy – 200–300 zł</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Strony internetowe</h3>
+        <ul>
+          <li>Strona wizytówka – 200–300 zł</li>
+          <li>Strona z podstronami – 400–600 zł</li>
+          <li>Landing page – 250–400 zł</li>
+          <li>Sklep internetowy – 600–900 zł</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="referencje">
+    <h2>Referencje</h2>
+    <div class="opinie">
+      <ul>
+        <li>„Świetna obsługa i szybka realizacja!”</li>
+        <li>„Strona wygląda profesjonalnie i działa perfekcyjnie.”</li>
+        <li>„Polecam Studio 404 każdemu, kto szuka dobrego grafika.”</li>
+      </ul>
+      <form>
+        <h4>Dodaj swoją opinię</h4>
+        <input type="text" placeholder="Twoje imię" required />
+        <textarea placeholder="Twoja opinia" rows="3" required></textarea>
+        <button type="submit">Wyślij</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <h2>Galeria</h2>
+    <img src="gallery1.jpg" alt="Projekt 1" onclick="openLightbox(this.src)">
+    <img src="gallery2.jpg" alt="Projekt 2" onclick="openLightbox(this.src)">
+    <img src="gallery3.jpg" alt="Projekt 3" onclick="openLightbox(this.src)">
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Powiększone zdjęcie">
+  </div>
+
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Masz pytania? Skontaktuj się ze mną:</p>
+    <p><strong>Telefon:</strong> 502 566 756</p>
+    <p><strong>Mail:</strong> kontakt@studio404.pl</p>
+    <div id="map"></div>
+  </section>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <<script>
+  const map = L.map('map').setView([49.610598, 20.627562], 17);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © OpenStreetMap contributors'
+  }).addTo(map);
+  L.marker([49.62936840280584, 20.591947400902367])
+    .addTo(map)
+    .bindPopup('Studio 404 – Trzetrzewina 91')
+    .openPopup();
+</script>
+</body>
+</html>
